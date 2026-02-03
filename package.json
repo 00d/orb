@@ -1,0 +1,17 @@
+{
+  "name": "gold-box-revival",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "pixi.js": "^8.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
