@@ -2,18 +2,21 @@
 
 ## Executive Summary
 
-Archives of Nethys (2e.aonprd.com) does not provide a public JSON API. However, structured Pathfinder 2e data is available through:
-1. **Pf2eTools GitHub repository** - Complete JSON dataset (recommended)
+Archives of Nethys (2e.aonprd.com) does not provide a public JSON API. However, structured Pathfinder 2e data can be sourced through:
+1. **Pf2eTools GitHub repository** - Large community-maintained JSON dataset (unofficial; validate provenance and license status before production use)
 2. **Elasticsearch endpoint** - Internal endpoint (limited/restricted access)
 3. **HTML scraping** - Not recommended
 
-## Option 1: Pf2eTools JSON Data (RECOMMENDED)
+## Option 1: Pf2eTools JSON Data (UNOFFICIAL COMMUNITY SOURCE)
 
 ### Repository
 **GitHub**: https://github.com/Pf2eToolsOrg/Pf2eTools
 
 ### Data Location
 All game data is stored in the `/data` directory as JSON files organized by content type.
+
+### Compliance Caveat
+Pf2eTools is not an official Paizo publication channel. Treat it as a technical feed, not a legal source of truth. For production, keep per-record source provenance and verify each imported rule element against an official ORC-compatible or otherwise licensed source workflow.
 
 ### Directory Structure
 ```
@@ -556,27 +559,27 @@ When the endpoint was accessible, the following categories were available:
 
 ### Ancestry URLs
 ```
-http://2e.aonprd.com/Ancestries.aspx          (list page)
-http://2e.aonprd.com/Ancestries.aspx?ID=1     (individual ancestry)
+https://2e.aonprd.com/Ancestries.aspx          (list page)
+https://2e.aonprd.com/Ancestries.aspx?ID=1     (individual ancestry)
 ```
 
 ### Class URLs
 ```
-http://2e.aonprd.com/Classes.aspx             (list page)
-http://2e.aonprd.com/Classes.aspx?ID=12       (individual class)
+https://2e.aonprd.com/Classes.aspx             (list page)
+https://2e.aonprd.com/Classes.aspx?ID=12       (individual class)
 ```
 
 ### Spell URLs
 ```
-http://2e.aonprd.com/Spells.aspx              (list page)
-http://2e.aonprd.com/Spells.aspx?ID=1         (individual spell)
+https://2e.aonprd.com/Spells.aspx              (list page)
+https://2e.aonprd.com/Spells.aspx?ID=1         (individual spell)
 ```
 
 ### Feat URLs
 ```
-http://2e.aonprd.com/Feats.aspx               (list page)
-http://2e.aonprd.com/Feats.aspx?ID=1          (individual feat)
-http://2e.aonprd.com/Feats.aspx?Traits=78     (filtered by trait)
+https://2e.aonprd.com/Feats.aspx               (list page)
+https://2e.aonprd.com/Feats.aspx?ID=1          (individual feat)
+https://2e.aonprd.com/Feats.aspx?Traits=78     (filtered by trait)
 ```
 
 ### Why Not Recommended
@@ -593,9 +596,9 @@ http://2e.aonprd.com/Feats.aspx?Traits=78     (filtered by trait)
 
 ### For Database Population
 
-**Use Pf2eTools GitHub Repository:**
+**Use a provenance-first workflow:**
 
-1. Clone or download the repository:
+1. Clone or download the repository (if using Pf2eTools as an input feed):
    ```bash
    git clone https://github.com/Pf2eToolsOrg/Pf2eTools.git
    ```
@@ -605,20 +608,24 @@ http://2e.aonprd.com/Feats.aspx?Traits=78     (filtered by trait)
    cd Pf2eTools/data
    ```
 
-3. Access JSON files directly or via raw.githubusercontent.com URLs
+3. Access JSON files directly or via raw.githubusercontent.com URLs.
 
-4. Parse JSON and insert into your database
+4. Parse JSON and insert into your database only after recording source provenance and license basis per item.
 
-### Advantages of Pf2eTools
-- Complete, structured JSON data
+5. Validate imported entries against your legal/compliance policy before shipping.
+
+### Advantages of Pf2eTools (Technical)
+- Large, structured JSON dataset
 - Well-documented schema
-- Actively maintained
-- All official Paizo content
+- Actively maintained by community contributors
 - Organized by source book
 - Index files for easy navigation
-- No rate limiting
+- No API key requirement
 - Fast access
-- Reliable structure
+
+### Important Limitations
+- Unofficial community project; content and metadata may differ from canonical wording or source publication timing.
+- Not a substitute for project-level ORC/trademark/legal compliance review.
 
 ### Sample Integration Code (Python)
 
@@ -740,14 +747,14 @@ https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/master/data/bestiary/{f
 
 ## Summary
 
-**Best Solution**: Use the Pf2eTools GitHub repository for structured JSON data access.
+**Practical Solution**: Use Pf2eTools as a technical ingestion source, with mandatory provenance tracking and compliance review.
 
 - No API keys required
 - No rate limiting
-- Complete data coverage
+- Broad data coverage
 - Well-structured JSON schema
 - Actively maintained
 - Fast and reliable
 - Easy to parse and import into databases
 
-The Archives of Nethys website itself does not provide a public JSON API, but the Pf2eTools project has already extracted and structured all the data in a developer-friendly format that is perfect for database population.
+The Archives of Nethys website itself does not provide a public JSON API. Pf2eTools can speed up engineering ingestion, but production use should include source validation, licensing checks, and clear audit trails for imported material.
